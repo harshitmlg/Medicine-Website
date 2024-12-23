@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="pharmacyApp">
+<head>
+  <title>Pharmacy Management</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div ng-controller="PharmacyController">
+    <h1 style="background-color: rgb(148, 217, 217); width:600px">Pharmacy Management System</h1>
+    
+    <h2>Add Medicine</h2>
+    <input type="text" placeholder="Medicine Name" ng-model="newMedicine.name">
+    <input type="number" placeholder="Quantity" ng-model="newMedicine.quantity">
+    <select ng-model="newMedicine.category">
+      <option value="Ayurvedic">Ayurvedic</option>
+      <option value="Homeopathic">Homeopathic</option>
+      <option value="Allopathic">Allopathic</option>
+    </select>
+    <button ng-click="addMedicine()">Add Medicine</button>
+
+    <h2>Medicine Inventory</h2>
+    <div ng-repeat="(category, medicines) in medicineInventory">
+      <h3>{{ category }}</h3>
+      <ul>
+        <li ng-repeat="medicine in medicines">
+          {{ medicine.name }} - {{ medicine.quantity }}
+          <button ng-click="incrementQuantity(medicine)">+</button>
+          <button ng-click="decrementQuantity(medicine)">-</button>
+          <button ng-click="removeMedicine(category, $index)">Remove</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
